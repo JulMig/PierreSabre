@@ -30,7 +30,7 @@ public class Humain {
 	public void acheter(String bien, int prix) {
 		if (prix <= getArgent()){
 			parler("J'ai " + getArgent() + " sous en poche. Je vais pouvoir m'offrir " + bien + " à " + prix + " sous.");
-			perdreArgent(prix);
+			argent -= prix;
 		} else {
 			parler("Je n'ai plus que " + getArgent() + " sous en poche. Je ne peux même pas m'offrir " + bien + " à " + prix +" sous.");
 		}
@@ -41,10 +41,14 @@ public class Humain {
 	}
 	
 	public void perdreArgent(int perte) {
+		if(argent < perte) {
+			argent = 0;
+		} else {
 		argent -= perte;
+		}
 	}
 	
-	private void parler(String texte){
+	protected void parler(String texte){
 		System.out.println("(" + getNom() + ") - " + texte);
 		
 	}
